@@ -1,0 +1,10 @@
+.navbar-main .nav-profile {
+    color: #012970;
+  }
+  .navbar-main .nav-profile img {
+    max-height: 36px;
+  }
+
+  .rounded-circle {
+    border-radius: 50%!important;
+}
