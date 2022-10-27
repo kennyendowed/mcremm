@@ -59,7 +59,7 @@ function EmailValidate() {
 					let Msg = () => (
 						<div>
 							 <img src={logo} className="toaster-brand-img h-100 wi0" alt="main_logo" />
-						<p> { ex.response.data.data[0].message} </p> 
+						<p> { ex.response.data.data[0].message } </p> 
 						</div>
 					  )
 					toast.error(Msg, {

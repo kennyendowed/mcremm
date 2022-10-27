@@ -14,7 +14,7 @@ function Header() {
       {currentUser ?(
       <div>
          <Navbar />
-         <ActionCard/>
+        
       </div>
 
            ):(
