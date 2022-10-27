@@ -12,6 +12,7 @@ const signup = (payload) => {
     .then((response) => {
       if (response.data.accessToken) {
         localStorage.setItem("user", JSON.stringify(response.data));
+        
       }
 
       return response.data;
@@ -25,6 +26,7 @@ const login = (email, password) => {
       password,
     })
     .then((response) => {
+      console.log(response)
       if(response.data.data[0].email_verify==="unverify"){
 
       }

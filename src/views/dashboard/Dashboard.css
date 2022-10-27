@@ -12,3 +12,17 @@
     border-top-left-radius: 80px !important ;
     border-top-right-radius: 80px !important ;
 }
+.add__button{
+    background-color: black;
+    color:white;
+    width: 80px;
+    border:0;
+    border-radius:3px;
+}
+.add__button:hover{
+     background-color: black;
+     opacity: 30px;
+}
+/* *{
+    border: 1px solid red
+} */

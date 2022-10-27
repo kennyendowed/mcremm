@@ -2,7 +2,9 @@
 @import "./assets/css/volt.css";
 
 
-
+*{
+  border: 1p solid red
+}
 
 
 

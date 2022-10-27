@@ -14,6 +14,7 @@ function Login() {
 	const navigate = useNavigate();
 	const { register, handleSubmit,   formState: { errors,isSubmitting, isDirty, isValid} } = useForm({ mode: "onChange" });
 	const [showPassword, setShowPassword] = useState(false)
+	const [loading , setLoading ] = useState(false)
 	// const [username, setEmail] = useState("");
 	// const [password, setPassword] = useState("");
 	// const handleClick =()=>{
@@ -23,6 +24,7 @@ function Login() {
 	const onSubmit =async (data) => {
 	    // console.log(data.email);
 		// console.log(data.username);
+		setLoading(true)
 		  try {
 		 AuthService.login(data.email, data.password).then(
 		  (result) => {
@@ -117,6 +119,9 @@ function Login() {
           progress: undefined,
           });
     
+	  }finally{
+		setLoading(false)
+		
 	  }
 
 	  };
@@ -203,7 +208,7 @@ function Login() {
           <p className="error-color">{errors.password?.message}</p>
 		  <div className="card-footer text-center pt-0 px-lg-2 px-1">
                   <p className="mb-4 text-sm mx-auto">
-                    Forgot Password ? 👉️
+                    Forgot Password ? 
 					<Link
 						to="/auth/forget-password"
 						  className="text-info text-gradient font-weight-bold">Click Me...</Link>
@@ -211,25 +216,19 @@ function Login() {
                 </div>
 
 		  <div className="d-flex align-items-center justify-content-between pb-0">
-		  {!isSubmitting ? 
+		  {!loading ? 
 		              (
                       <button type="submit" className="btn bg-gradient-info w-100 mt-4 mb-0"  disabled={!isDirty || !isValid}>Login</button> 
-                      ) : (
-
+                      ):(
                         <button
                           className="btn bg-gradient-info w-100 mt-4 mb-0"
-                          disabled
+                          disabled 
                         >
                         <LoadingSpinner/> 
                         </button>
                       )
-					  }
-
-                       
-					
-							
-                       
-                      </div>
+					  }     
+            </div>
 					
       </form>
 	 
