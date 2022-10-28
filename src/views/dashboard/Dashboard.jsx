@@ -1,4 +1,4 @@
-import React, { useEffect, useState,createContext } from "react";
+import React, { useEffect, useState,createContext ,useMemo } from "react";
 import { useLocation } from "react-router-dom";
 import { toast } from 'react-toastify';
 import logo from "../../assets/img/logo.svg";
@@ -7,12 +7,13 @@ import dashboardService from "../../core/services/dashboard.service";
 import Skeleton from 'react-loading-skeleton';
 import Card from "../../Components/Card/Card";
 import { Modal, Button } from "react-bootstrap";
+import { responsiveFontSizes } from "@mui/material";
 
 
 
 const API_URL2 = process.env.REACT_APP_BaseApi_URL
 const INITIAL_FORM_STATE = {
-  sN: "",
+  serial: "",
   ref: "",
   weight: "",
   companyName: "",
@@ -35,9 +36,13 @@ function Dashboard() {
   const [formdata , setFormdata ] = useState(INITIAL_FORM_STATE)
  
   const [openModal, setBulkUploadShow] = useState(false);
- 
+  const [ loading , setLoading] = useState(false)
   const [ items ,setItems ] = useState([])
   const [ file , setFile ] = useState([])
+  const [search, setSearch] = useState("");
+  const [sorting, setSorting] = useState({ field: "", order: "" });
+  const [totalItems, setTotalItems] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
  
   const location = useLocation();
 
@@ -131,7 +136,7 @@ function Dashboard() {
 
   const handleFormStateChange = (event) => {
     const { name, value } = event.target;
-    setFormdata({ ...formdata, [name]: value });
+    setFormdata({ ...formdata, [name] : value });
   };
 
   const handlefileEvent = (e) => {
@@ -159,11 +164,60 @@ function Dashboard() {
 
     
   };
+
+  useEffect(() => {
+    setLoading(true)
+    var arData = {
+        department: "null",
+         status :  "null"
+      }
+
+      dashboardService.fetchAllsDeparment().then(
+          (response) => {
+                  setItems(response.data.data);
+                   });
+
+                   dashboardService.GetReport(arData).then(
+                    (response) => {
+                        setLoading(false)	
+                        setFetchExisted(response.data);
+                    });  
+     
+  }, []);
+
+  const commentsData2 = useMemo(() => {
+      let computedComments = isFetchExisted;
+      if (search) {
+          computedComments = computedComments.filter(comment =>
+              comment.newRMcode.toLowerCase().includes(search) || comment.oldRMcODE.toLowerCase().includes(search) || comment.accountNumber.toLowerCase().includes(search)
+          );
+      }
+      
+
+      setTotalItems(computedComments.length);
+
+      //Sorting comments
+      if (sorting.field) {
+          const reversed = sorting.order === "asc" ? 1 : -1;
+          computedComments = computedComments.sort(
+              (a, b) =>
+                  reversed * a[sorting.field].localeCompare(b[sorting.field])
+          );
+      }
+
+      if (computedComments.length > 0) {
+          return computedComments.slice((currentPage - 1) * ITEMS_PER_PAGE, (currentPage - 1) * ITEMS_PER_PAGE + ITEMS_PER_PAGE);
+      }
+      else {
+          return computedComments.data;
+      }
+
+  }, [isFetchExisted, currentPage, search, sorting]);
 const handleSubmit = async (e)=>{
   e.preventDefault()
   const token =  localStorage.getItem("token")
   const formData = new FormData();
-  formData.append("sN", formData.sN);
+  
   formData.append("ref", formdata.ref);
   formData.append("weight", formdata.weight);
   formData.append("capacity", formdata.capacity);
@@ -175,7 +229,9 @@ const handleSubmit = async (e)=>{
   formData.append("nextInspDate", formdata.nextInspDate);
   formData.append("inspDate", formdata.inspDate);
   formData.append("manufacturedYear", formdata.manufacturedYear);
+  formData.append("equipment", formdata.equipment);
   formData.append("avater", file);
+  formData.append("serial", formdata.serial);
 
   for (var pair of formData.entries()) {
     console.log(pair[0] + ", " + pair[1]);
@@ -183,10 +239,35 @@ const handleSubmit = async (e)=>{
 
   dashboardService.AddDocument(formData).then(
     (response) => {
-        setItems(response.data);
+       
+        if(response.data[0].code === 200){
+
+            console.log(response.data[0].data);
+            const data = response.data[0].data
+            console.log(data.manufacturedYear)
+            setItems(response.data);
+            let Msg = () => (
+                <div>
+                    <img src={logo} className="toaster-brand-img h-100" alt="main_logo" />
+                    <p> {response.message} </p>
+                </div>
+            )
+            toast.success(Msg, {
+                position: "top-right",
+                autoClose: 10000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+            
+        }
+        
     }  , 
         (ex) => {
                 // console.log(ex );
+                
                 if (ex.code === "ERR_NETWORK") {
                     let Msg = () => (
                         <div>
@@ -372,42 +453,47 @@ const handleSubmit = async (e)=>{
                                     <th className="border-0 rounded-end">fleet no</th>
                                 </tr>
                             </thead>
+                           
                             <tbody>
+                               {items.map((item) =>{ 
+                                           <tr>
+                                           <td><a href="#" className="text-primary fw-bold">1</a> </td>
+                                           <td className="fw-bold d-flex align-items-center">
+                                               <svg className="icon icon-xxs text-gray-500 me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM4.332 8.027a6.012 6.012 0 011.912-2.706C6.512 5.73 6.974 6 7.5 6A1.5 1.5 0 019 7.5V8a2 2 0 004 0 2 2 0 011.523-1.943A5.977 5.977 0 0116 10c0 .34-.028.675-.083 1H15a2 2 0 00-2 2v2.197A5.973 5.973 0 0110 16v-2a2 2 0 00-2-2 2 2 0 01-2-2 2 2 0 00-1.668-1.973z" clipRule="evenodd"></path></svg>
+                                               Direct
+                                           </td>
+                                           <td>
+                                               Direct
+                                           </td>
+                                           <td>
+                                              - 
+                                           </td>
+                                           <td>
+                                              --
+                                           </td>
+                                           <td>
+                                               <div className="row d-flex align-items-center">
+                                                   <div className="col-12 col-xl-2 px-0">
+                                                       <div className="small fw-bold">51%</div>
+                                                   </div>
+                                                   <div className="col-12 col-xl-10 px-0 px-xl-1">
+                                                       <div className="progress progress-lg mb-0">
+                                                           <div className="progress-bar bg-dark" role="progressbar" aria-valuenow="51" aria-valuemin="0" aria-valuemax="100" clipRule="width: 51%;"></div>
+                                                       </div>
+                                                   </div>
+                                               </div>
+                                           </td>
+                                           <td className="text-success">
+                                               <div className="d-flex align-items-center">
+                                                   <svg className="icon icon-xs me-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clipRule="evenodd"></path></svg>                                   
+                                                   <span className="fw-bold">2.45%</span>
+                                               </div>
+                                           </td>
+                                       </tr>
+                                
+                                }) }
                          
-                                <tr>
-                                    <td><a href="#" className="text-primary fw-bold">1</a> </td>
-                                    <td className="fw-bold d-flex align-items-center">
-                                        <svg className="icon icon-xxs text-gray-500 me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM4.332 8.027a6.012 6.012 0 011.912-2.706C6.512 5.73 6.974 6 7.5 6A1.5 1.5 0 019 7.5V8a2 2 0 004 0 2 2 0 011.523-1.943A5.977 5.977 0 0116 10c0 .34-.028.675-.083 1H15a2 2 0 00-2 2v2.197A5.973 5.973 0 0110 16v-2a2 2 0 00-2-2 2 2 0 01-2-2 2 2 0 00-1.668-1.973z" clipRule="evenodd"></path></svg>
-                                        Direct
-                                    </td>
-                                    <td>
-                                        Direct
-                                    </td>
-                                    <td>
-                                       - 
-                                    </td>
-                                    <td>
-                                       --
-                                    </td>
-                                    <td>
-                                        <div className="row d-flex align-items-center">
-                                            <div className="col-12 col-xl-2 px-0">
-                                                <div className="small fw-bold">51%</div>
-                                            </div>
-                                            <div className="col-12 col-xl-10 px-0 px-xl-1">
-                                                <div className="progress progress-lg mb-0">
-                                                    <div className="progress-bar bg-dark" role="progressbar" aria-valuenow="51" aria-valuemin="0" aria-valuemax="100" clipRule="width: 51%;"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td className="text-success">
-                                        <div className="d-flex align-items-center">
-                                            <svg className="icon icon-xs me-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clipRule="evenodd"></path></svg>                                   
-                                            <span className="fw-bold">2.45%</span>
-                                        </div>
-                                    </td>
-                                </tr>
+                              
                             
                              
                             </tbody>
@@ -468,20 +554,20 @@ const handleSubmit = async (e)=>{
                                                onChange = {handleFormStateChange}
                                             
                                               class="form-control" 
-                                              id="birthday" 
+                                            
                                               type="text" 
                                               required 
                                               />
                                          </div>
                                      </div>
                                      <div class="col-md-6 mb-3">
-                                         <label for="gender">sn/no</label>
+                                         <label >sn/no</label>
                                           <input
-                                           value = {formdata.sN} 
-                                           name = "sN"
+                                           value = {formdata.serial} 
+                                           name = "serial"
                                            onChange = {handleFormStateChange}
                                           class="form-control mb-0" 
-                                          id="gender"  
+                                         required
                                           />
                                         
                                    
@@ -580,6 +666,7 @@ const handleSubmit = async (e)=>{
                                     <div class="form-group">
                                         <label >insp date</label>
                                         <input 
+                                      
                                         value ={formdata.inspDate}
                                         name  =  "inspDate"
                                         onChange = {handleFormStateChange}
@@ -594,7 +681,7 @@ const handleSubmit = async (e)=>{
                                     <div class="form-group">
                                         <label>Next insp</label>
                                         <input
-                                        
+                                        type = "date"
                                         value = {formdata.nextInspDate}
                                         name = "nextInspDate"
                                         onChange = {handleFormStateChange}

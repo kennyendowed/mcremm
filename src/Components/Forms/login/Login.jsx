@@ -3,7 +3,7 @@ import { useNavigate,Link } from "react-router-dom";
 import { toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
 import AuthService from "../../../core/services/auth.service";
-import LoadingSpinner from "../../../Components/Utility/spinner";
+import PulseLoader from "react-spinners/PulseLoader";
 import "./Login.css";
 // import background from "../../../assets/img/curved-images/curved6.jpg";
  import logo from "../../../assets/img/logo.svg";
@@ -216,18 +216,11 @@ function Login() {
                 </div>
 
 		  <div className="d-flex align-items-center justify-content-between pb-0">
-		  {!loading ? 
-		              (
-                      <button type="submit" className="btn bg-gradient-info w-100 mt-4 mb-0"  disabled={!isDirty || !isValid}>Login</button> 
-                      ):(
-                        <button
-                          className="btn bg-gradient-info w-100 mt-4 mb-0"
-                          disabled 
-                        >
-                        <LoadingSpinner/> 
-                        </button>
-                      )
-					  }     
+		   
+		              
+                      <button type="submit" className="btn bg-gradient-info w-100 mt-4 mb-0"  >{loading?<PulseLoader/> :"Login"}</button> 
+                     
+					      
             </div>
 					
       </form>
