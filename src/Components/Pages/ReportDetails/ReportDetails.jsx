@@ -14,13 +14,13 @@ console.log(RmsCustomers)
 const  IMG ="data:image/png;base64,"+avater +"";
 const DownloadReport = async (e) => {
   // e.preventDefault();
-  let ref = localStorage.getItem("debitAccount");
-  let accountNumber = localStorage.getItem("accountNumber");
-  let chargeOption = localStorage.getItem("chargeOption");
-  let debitAmountB = localStorage.getItem("debitAmount");
-  let creditAcct = localStorage.getItem("creditAcct");
-  let numPages = localStorage.getItem("numPages");
-  let ref = localStorage.getItem("ref");
+  // let ref = localStorage.getItem("debitAccount");
+  // let accountNumber = localStorage.getItem("accountNumber");
+  // let chargeOption = localStorage.getItem("chargeOption");
+  // let debitAmountB = localStorage.getItem("debitAmount");
+  // let creditAcct = localStorage.getItem("creditAcct");
+  // let numPages = localStorage.getItem("numPages");
+  // let ref = localStorage.getItem("ref");
   
 
 };
