@@ -9,15 +9,10 @@ const fetchExistedUsers = () => {
   // return fetch(API_URL + "/getAllExistedRMS", { method: 'GET', headers: authHeader()});
 };
 
-const fetchRMSCustomerUsersList =(payload) =>{
-  return axios.post(API_URL2 + "getRMSCustomerList",payload, {headers: authHeader()})
-  .then((response) => {
-      return response.data;
-  });
-}
 
-const fetchAllDeparment =() =>{
-  return axios.get(API_URL2 + "/GetDeparment", { headers: authHeader() });
+
+const fetchAllCompany =() =>{
+  return axios.get(API_URL2 + "GetallCompany", { headers: authHeader() });
 }
 
 const AddDocument =(payload) =>{
@@ -27,35 +22,35 @@ const AddDocument =(payload) =>{
   });
 }
 
-const ReassignRequest = (payload) => {
-  return axios.post(API_URL2 + "ReassignRequest",payload, {headers: authHeader()})
-  .then((response) => {
-      return response.data;
-  });
-}
+// const ReassignRequest = (payload) => {
+//   return axios.post(API_URL2 + "ReassignRequest",payload, {headers: authHeader()})
+//   .then((response) => {
+//       return response.data;
+//   });
+// }
 
-const ActionRequest =(payload) =>{
-  return axios.post(API_URL2 + "ApproveDeclineRequests", payload, { headers: authHeader() })
-  .then((response) => {
-    return response.data;
-});
-}
+// const ActionRequest =(payload) =>{
+//   return axios.post(API_URL2 + "ApproveDeclineRequests", payload, { headers: authHeader() })
+//   .then((response) => {
+//     return response.data;
+// });
+// }
 
-const fetchPendingRequests = (payload) =>{
-  return axios.post(API_URL2 + "GetAllPendingRequests", payload, { headers: authHeader() })
-  .then((response) => {
-    return response.data;
-});
-}
+// const fetchPendingRequests = (payload) =>{
+//   return axios.post(API_URL2 + "GetAllPendingRequests", payload, { headers: authHeader() })
+//   .then((response) => {
+//     return response.data;
+// });
+// }
 
-const fetchTreatedRequests = (payload) =>{
-  return axios.post(API_URL2 + "GetAllTreatedRequests", payload, { headers: authHeader() })
-  .then((response) => {
-    return response.data;
-});
-}
+// const fetchTreatedRequests = (payload) =>{
+//   return axios.post(API_URL2 + "GetAllTreatedRequests", payload, { headers: authHeader() })
+//   .then((response) => {
+//     return response.data;
+// });
+// }
 const GetReport =(payload) =>{
-  return axios.post(API_URL2 + "GetAllReport",payload, {headers: authHeader()})
+  return axios.post(API_URL2 + "getReport",payload, {headers: authHeader()})
   .then((response) => {
       return response.data;
   });
@@ -63,7 +58,7 @@ const GetReport =(payload) =>{
 
 
 const dashboardService = {
-  AddDocument,GetReport,fetchTreatedRequests,fetchAllDeparment,fetchPendingRequests,fetchExistedUsers,fetchRMSCustomerUsersList,ReassignRequest,ActionRequest
+  AddDocument,GetReport,fetchAllCompany,fetchExistedUsers,
 };
 
 export default dashboardService;
