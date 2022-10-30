@@ -6,22 +6,62 @@ import logo from "../../../assets/img/logo.svg";
 import ReassignRequestService from "../../../core/services/dashboard.service";
 import LoadingSpinner from "../../Utility/spinner";
 import dashboardService from "../../../core/services/dashboard.service";
+import moment from "moment";
 
 
 function ReportDetails({ RmsCustomers,updateSET }) {
   const {createdAt,weight,companyName,capacity,avater,equipment,user_id,sN,ref,organisation_details,inspDate,nextInspDate,fleetNO,manufacturer, location,manufacturedYear,modeType,id} = RmsCustomers;
-console.log(RmsCustomers)
+// console.log(RmsCustomers)
 const  IMG ="data:image/png;base64,"+avater +"";
-const DownloadReport = async (e) => {
-  // e.preventDefault();
-  // let ref = localStorage.getItem("debitAccount");
-  // let accountNumber = localStorage.getItem("accountNumber");
-  // let chargeOption = localStorage.getItem("chargeOption");
-  // let debitAmountB = localStorage.getItem("debitAmount");
-  // let creditAcct = localStorage.getItem("creditAcct");
-  // let numPages = localStorage.getItem("numPages");
-  // let ref = localStorage.getItem("ref");
-  
+
+  const DownloadReport =async (record) => {
+   const dg ={
+    id:record.id
+   }
+    dashboardService.DownloadDoc(dg).then(
+      (response) => {
+        console.log(response)
+        if(response.code === 200){
+          let Msg = () => (
+            <div>
+                  <img src={logo} className="toaster-brand-img h-100" alt="main_logo" />
+                  <p> done...... </p>
+              </div>
+          )
+          toast.success(Msg, {
+             position: "top-right",
+             autoClose: 10000,
+             hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+             progress: undefined,
+         });
+        }
+      },
+      (ex) => {
+        if (typeof ex.response.data.data != 'string') {
+          for (let err in ex.response.data.data) {
+         
+            let Msg = () => (
+              <div>
+                <img src={logo} className="toaster-brand-img h-100" alt="main_logo" />
+                <p> {err.message} </p>
+              </div>
+            )
+            toast.error(Msg, {
+              position: "top-right",
+              autoClose: 10000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+          }
+        }
+
+      });
 
 };
 
@@ -62,7 +102,7 @@ const DownloadReport = async (e) => {
 
                                 <br/>
                                 
-                                    <a className="btn btn-sm btn-secondary"  onClick={DownloadReport}>Download Report</a>
+                                    <a className="btn btn-sm btn-secondary" onClick={() => DownloadReport(RmsCustomers)} >Download Report</a>
                                 </div>
                              </div>
                         </div>

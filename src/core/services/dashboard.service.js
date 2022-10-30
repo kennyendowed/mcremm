@@ -43,12 +43,12 @@ const AddDocument =(payload) =>{
 // });
 // }
 
-// const fetchTreatedRequests = (payload) =>{
-//   return axios.post(API_URL2 + "GetAllTreatedRequests", payload, { headers: authHeader() })
-//   .then((response) => {
-//     return response.data;
-// });
-// }
+const DownloadDoc = (payload) =>{
+  return axios.post(API_URL2 + "Download", payload, { headers: authHeader() })
+  .then((response) => {
+    return response.data;
+});
+}
 const GetReport =(payload) =>{
   return axios.post(API_URL2 + "getReport",payload, {headers: authHeader()})
   .then((response) => {
@@ -58,7 +58,7 @@ const GetReport =(payload) =>{
 
 
 const dashboardService = {
-  AddDocument,GetReport,fetchAllCompany,fetchExistedUsers,
+  AddDocument,GetReport,fetchAllCompany,fetchExistedUsers,DownloadDoc
 };
 
 export default dashboardService;
