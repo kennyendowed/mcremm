@@ -12,7 +12,7 @@ import moment from "moment";
 function ReportDetails({ RmsCustomers,updateSET }) {
   const {createdAt,weight,companyName,capacity,avater,equipment,user_id,sN,ref,organisation_details,inspDate,nextInspDate,fleetNO,manufacturer, location,manufacturedYear,modeType,id} = RmsCustomers;
 // console.log(RmsCustomers)
-const  IMG ="data:image/png;base64,"+avater +"";
+//const  IMG ="data:image/png;base64,"+avater +"";
 
   const DownloadReport =async (record) => {
    const dg ={
@@ -99,7 +99,7 @@ const  IMG ="data:image/png;base64,"+avater +"";
                             <div className="card shadow border-0 text-center p-0">
                                 <div className="profile-cover rounded-top" data-background="../assets/img/profile-cover.jpg"></div>
                                 <div className="card-body pb-5">
-                                <img src={IMG} className=" mx-auto mt-n7 mb-4" />
+                                <img src={avater} className=" mx-auto mt-n7 mb-4" />
 
                                 <br/>
                                 
