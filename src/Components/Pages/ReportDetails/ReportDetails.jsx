@@ -41,8 +41,8 @@ const  IMG ="data:image/png;base64,"+avater +"";
         }
       },
       (ex) => {
-        if (typeof ex.response.data.data != 'string') {
-          for (let err in ex.response.data.data) {
+ console.log(ex)
+          for (let err in ex.response.data) {
          
             let Msg = () => (
               <div>
@@ -60,7 +60,7 @@ const  IMG ="data:image/png;base64,"+avater +"";
               progress: undefined,
             });
           }
-        }
+        
 
       });
 
