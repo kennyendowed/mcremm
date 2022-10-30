@@ -186,193 +186,191 @@ function SaveReport(){
     return (
         <>
           <form onSubmit = {handleSubmit}>
-                  <div class="row">
-                     <div class="col-12 col-xl-8 w-100">
-                       <div class="card card-body border-0 shadow mb-4">
-                         
-                             <form>
-                                <div class="row">
-                                  <div class="col-md-6 mb-3">
+                  <div className="row">
+                     <div className="col-12 col-xl-8 w-100">
+                       <div className="card card-body border-0 shadow mb-4">
+                                <div className="row">
+                                  <div className="col-md-6 mb-3">
                                      <div>
-                                        <label for="first_name">Reference number</label>
+                                        <label htmlFor="first_name">Reference number</label>
                                         <input 
                                          value = {formdata.ref}
                                          name = "ref"
                                          onChange = {handleFormStateChange}
-                                        class="form-control" 
+                                        className="form-control" 
                                         id="first_name" 
                                         type="text"  
                                         required 
                                         />
                                      </div>
                                    </div>
-                                   <div class="col-md-6 mb-3">
+                                   <div className="col-md-6 mb-3">
                                      <div>
-                                        <label for="last_name">Customer Name</label>
+                                        <label htmlFor="last_name">Customer Name</label>
                                         <input
                                          value ={formdata.companyName} 
                                          name = "companyName"
                                          onChange = {handleFormStateChange}
-                                        class="form-control" 
+                                        className="form-control" 
                                         id="last_name" 
                                         type="text"  required />
                                      </div>
                                    </div>
                                  </div>
-                                <div class="row align-items-center">
-                                    <div class="col-md-6 mb-3">
-                                       <label for="birthday">Equipment</label>
-                                         <div class="input-group">
+                                <div className="row align-items-center">
+                                    <div className="col-md-6 mb-3">
+                                       <label htmlFor="birthday">Equipment</label>
+                                         <div className="input-group">
                                              
                                               <input
                                                value = {formdata.equipment} 
                                                name = "equipment"
                                                onChange = {handleFormStateChange}
                                             
-                                              class="form-control" 
+                                              className="form-control" 
                                             
                                               type="text" 
                                               required 
                                               />
                                          </div>
                                      </div>
-                                     <div class="col-md-6 mb-3">
+                                     <div className="col-md-6 mb-3">
                                          <label >sn/no</label>
                                           <input
                                            value = {formdata.serial} 
                                            name = "serial"
                                            onChange = {handleFormStateChange}
-                                          class="form-control mb-0" 
+                                          className="form-control mb-0" 
                                          required
                                           />
                                         
                                    
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <div class="form-group">
+                            <div className="row">
+                                <div className="col-md-6 mb-3">
+                                    <div className="form-group">
                                         <label >model/type</label>
                                         <input
                                          value = {formdata.modeType}
                                          name = "modeType"
                                          onChange = {handleFormStateChange}
-                                        class="form-control" 
+                                        className="form-control" 
                                         
                                          required
                                          />
                                     </div>
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    <div class="form-group">
+                                <div className="col-md-6 mb-3">
+                                    <div className="form-group">
                                         <label >fleet no</label>
                                         <input 
                                         value ={formdata.fleetNO}
                                         name = "fleetNO"
                                         onChange = {handleFormStateChange}
-                                        class="form-control" 
+                                        className="form-control" 
                                            required />
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <div class="form-group">
+                            <div className="row">
+                                <div className="col-md-6 mb-3">
+                                    <div className="form-group">
                                         <label >Manufacturer</label>
                                         <input
                                          value = {formdata.manufacturer}
                                          name = "manufacturer"
                                          onChange = {handleFormStateChange}
 
-                                        class="form-control" 
+                                        className="form-control" 
                                        
                                          required/>
                                     </div>
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    <div class="form-group">
+                                <div className="col-md-6 mb-3">
+                                    <div className="form-group">
                                         <label>Location</label>
                                         <input 
                                         value = {formdata.location}
                                         name = "location"
                                         onChange = {handleFormStateChange}
-                                        class="form-control" 
+                                        className="form-control" 
                                          required />
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <div class="form-group">
+                            <div className="row">
+                                <div className="col-md-6 mb-3">
+                                    <div className="form-group">
                                         <label >Capacity</label>
                                         <input
 
-                                        class="form-control" 
+                                        className="form-control" 
                                         value = {formdata.capacity} 
                                         name = "capacity"
                                         onChange = {handleFormStateChange} 
                                          required/>
                                     </div>
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    <div class="form-group">
+                                <div className="col-md-6 mb-3">
+                                    <div className="form-group">
                                         <label>Weight</label>
                                         <input
                                         onChange = {handleFormStateChange} 
                                         value = {formdata.weight}
                                         name = "weight"
-                                        class="form-control"  required />
+                                        className="form-control"  required />
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <div class="form-group">
-                                        <label for="email">Manufactured year</label>
+                            <div className="row">
+                                <div className="col-md-6 mb-3">
+                                    <div className="form-group">
+                                        <label htmlFor="email">Manufactured year</label>
                                         <input
                                         value = {formdata.manufacturedYear}
                                         name ="manufacturedYear"
                                             onChange = { handleFormStateChange }
-                                        class="form-control" 
+                                        className="form-control" 
                                         id="email"  
                                          required/>
                                     </div>
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    <div class="form-group">
+                                <div className="col-md-6 mb-3">
+                                    <div className="form-group">
                                         <label >insp date</label>
                                         <input 
                                       
                                         value ={formdata.inspDate}
                                         name  =  "inspDate"
                                         onChange = {handleFormStateChange}
-                                        class="form-control" 
+                                        className="form-control" 
                                         type = "date" 
                                         required />
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <div class="form-group">
+                            <div className="row">
+                                <div className="col-md-6 mb-3">
+                                    <div className="form-group">
                                         <label>Next insp</label>
                                         <input
                                         type = "date"
                                         value = {formdata.nextInspDate}
                                         name = "nextInspDate"
                                         onChange = {handleFormStateChange}
-                                        class="form-control" 
+                                        className="form-control" 
                                        
                                          required/>
                                     </div>
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    <div class="form-group mt-2">
+                                <div className="col-md-6 mb-3">
+                                    <div className="form-group mt-2">
                                         <label></label>
                                         <input
                                            type = "file"
                                            name = "file"
-                                           class="form-control" 
+                                           className="form-control" 
                                            onChange={handlefileEvent}
                                          required/>
                                     </div>
@@ -380,10 +378,10 @@ function SaveReport(){
                               
                             </div>
                      
-                            <div class="mt-3">
-                                <button class="btn btn-gray-800 mt-2 animate-up-2"  onClick={handleSubmit} type="submit">Save all</button>
+                            <div className="mt-3">
+                                <button className="btn btn-gray-800 mt-2 animate-up-2"  onClick={handleSubmit} type="submit">Save all</button>
                             </div>
-                        </form>
+                     
                       </div>
                     </div>
                     </div>

@@ -31,8 +31,13 @@ const DownloadDoc = (payload) =>{
 const GetReport =(payload) =>{
   return axios.post(API_URL2 + "getReport",payload, {headers: authHeader()})
   .then((response) => {
+   // console.log("axios------------------",response)
       return response.data;
   });
+  // .catch((err)=>{
+  //  // console.log("axios------------------",err)
+  //   return err.response;
+  // });
 }
 
 

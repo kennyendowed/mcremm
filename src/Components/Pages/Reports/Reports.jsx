@@ -80,34 +80,36 @@ function Reports(props) {
         setisLoader(true)
         dashboardService.GetReport(arData).then(
               (response) => {
+                console.log(response)
                 setisLoader(false)	
-                if(response.data.length === 0){
-                  let Msg = () => (
-                    <div>
-                          <img src={logo} className="toaster-brand-img h-100" alt="main_logo" />
-                          <p> No record </p>
-                      </div>
-                  )
-                  toast.error(Msg, {
-                     position: "top-right",
-                     autoClose: 10000,
-                     hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                     progress: undefined,
-                 });
-                 setFetchExisted([]);
-                 setisSubmitted(false);
-                }
-                else{
-                  setFetchExisted(response.data);
-                  setisSubmitted(false);
+                // if(response.data[0].code === 404){
+                //   let Msg = () => (
+                //     <div>
+                //           <img src={logo} className="toaster-brand-img h-100" alt="main_logo" />
+                //           <p> No record </p>
+                //       </div>
+                //   )
+                //   toast.error(Msg, {
+                //      position: "top-right",
+                //      autoClose: 10000,
+                //      hideProgressBar: false,
+                //     closeOnClick: true,
+                //     pauseOnHover: true,
+                //     draggable: true,
+                //      progress: undefined,
+                //  });
+                //  setFetchExisted([]);
+                //  setisSubmitted(false);
+                // }
+                // else{
+                //   setFetchExisted(response.data);
+                //   setisSubmitted(false);
 
-                }
+                // }
                 
               }, 
                   (ex) => {
+                    console.log(ex)
                     setisSubmitted(false);
                     setisLoader(false)	
                           if (ex.code === "ERR_NETWORK") {
@@ -185,9 +187,96 @@ function Reports(props) {
 
                    dashboardService.GetReport(arData).then(
                     (response) => {
+                        console.log(response.data[0].code )
+                   
                         setisLoader(false)	
+                        
                         setFetchExisted(response.data);
-                    });  
+                        // if(response.data[0].code === 404){
+                        //   let Msg = () => (
+                        //     <div>
+                        //           <img src={logo} className="toaster-brand-img h-100" alt="main_logo" />
+                        //           <p> No record </p>
+                        //       </div>
+                        //   )
+                        //   toast.error(Msg, {
+                        //      position: "top-right",
+                        //      autoClose: 10000,
+                        //      hideProgressBar: false,
+                        //     closeOnClick: true,
+                        //     pauseOnHover: true,
+                        //     draggable: true,
+                        //      progress: undefined,
+                        //  });
+                        //  setFetchExisted([]);
+                        //  setisSubmitted(false);
+                        // }
+                        // else{
+                        //   setFetchExisted(response.data);
+                        //   setisSubmitted(false);
+        
+                        // }
+                    }, 
+                    (ex) => {
+                      console.log(ex.response.data.status )
+                      setisSubmitted(false);
+                      setisLoader(false)	
+                            if (ex.code === "ERR_NETWORK") {
+                                let Msg = () => (
+                                    <div>
+                                        <img src={logo} className="toaster-brand-img h-100" alt="main_logo" />
+                                        <p> {ex.message} </p>
+                                    </div>
+                                )
+                                toast.error(Msg, {
+                                    position: "top-right",
+                                    autoClose: 10000,
+                                    hideProgressBar: false,
+                                    closeOnClick: true,
+                                    pauseOnHover: true,
+                                    draggable: true,
+                                    progress: undefined,
+                                });
+                            }
+        
+                            if (ex.response.data.status === "FALSE") {
+                                let Msg = () => (
+                                    <div>
+                                        <img src={logo} className="toaster-brand-img h-100" alt="main_logo" />
+                                        <p> {ex.message}  </p>
+                                        <p>❌ {ex.response.data.message} ❌</p>
+                                    </div>
+                                )
+                                toast.error(Msg, {
+                                    position: "top-right",
+                                    autoClose: 10000,
+                                    hideProgressBar: false,
+                                    closeOnClick: true,
+                                    pauseOnHover: true,
+                                    draggable: true,
+                                    progress: undefined,
+                                });
+                            }
+                            else if (ex.response.data.code === 404) {
+                                let Msg = () => (
+                                    <div>
+                                        <img src={logo} className="toaster-brand-img h-100" alt="main_logo" />
+                                        <p> {ex.message}  </p>
+                                        <p>❌ {ex.response.data.message} ❌</p>
+                                    </div>
+                                )
+                                toast.error(Msg, {
+                                    position: "top-right",
+                                    autoClose: 10000,
+                                    hideProgressBar: false,
+                                    closeOnClick: true,
+                                    pauseOnHover: true,
+                                    draggable: true,
+                                    progress: undefined,
+                                });
+                            }
+        
+                        });
      
   }, []);
 
@@ -219,7 +308,7 @@ function Reports(props) {
       }
 
   }, [isFetchExisted, currentPage, search, sorting]);
-console.log(commentsData2)
+
   return (
       <>
           <div className="row my-4">
