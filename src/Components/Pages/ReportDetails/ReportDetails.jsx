@@ -37,6 +37,7 @@ const  IMG ="data:image/png;base64,"+avater +"";
             draggable: true,
              progress: undefined,
          });
+         window.open(response.data, '_blank').focus();
         }
       },
       (ex) => {

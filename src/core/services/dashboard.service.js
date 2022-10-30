@@ -22,27 +22,6 @@ const AddDocument =(payload) =>{
   });
 }
 
-// const ReassignRequest = (payload) => {
-//   return axios.post(API_URL2 + "ReassignRequest",payload, {headers: authHeader()})
-//   .then((response) => {
-//       return response.data;
-//   });
-// }
-
-// const ActionRequest =(payload) =>{
-//   return axios.post(API_URL2 + "ApproveDeclineRequests", payload, { headers: authHeader() })
-//   .then((response) => {
-//     return response.data;
-// });
-// }
-
-// const fetchPendingRequests = (payload) =>{
-//   return axios.post(API_URL2 + "GetAllPendingRequests", payload, { headers: authHeader() })
-//   .then((response) => {
-//     return response.data;
-// });
-// }
-
 const DownloadDoc = (payload) =>{
   return axios.post(API_URL2 + "Download", payload, { headers: authHeader() })
   .then((response) => {
