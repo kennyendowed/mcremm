@@ -16,8 +16,8 @@ const fetchRMSCustomerUsersList =(payload) =>{
   });
 }
 
-const fetchAllDeparment =() =>{
-  return axios.get(API_URL2 + "/GetDeparment", { headers: authHeader() });
+const fetchDocument =() =>{
+  return axios.get(API_URL2 + "getReport", { headers: authHeader() });
 }
 
 const AddDocument =(payload) =>{
@@ -63,7 +63,7 @@ const GetReport =(payload) =>{
 
 
 const dashboardService = {
-  AddDocument,GetReport,fetchTreatedRequests,fetchAllDeparment,fetchPendingRequests,fetchExistedUsers,fetchRMSCustomerUsersList,ReassignRequest,ActionRequest
+  AddDocument,GetReport,fetchTreatedRequests,fetchDocument,fetchPendingRequests,fetchExistedUsers,fetchRMSCustomerUsersList,ReassignRequest,ActionRequest
 };
 
 export default dashboardService;

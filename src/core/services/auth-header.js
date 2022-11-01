@@ -3,7 +3,7 @@ export default function authHeader() {
 
   if (user) {
     // return { Authorization: 'Bearer ' + user.accessToken };
-    return { "Authorization": user , 'Content-Type': 'multipart/form-data', };
+    return { "Authorization": user  };
   } else {
     return {};
   }

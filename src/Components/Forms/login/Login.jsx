@@ -24,9 +24,10 @@ function Login() {
 	const onSubmit =async (data) => {
 	    // console.log(data.email);
 		// console.log(data.username);
-		setLoading(true)
+		
 		  try {
-		 AuthService.login(data.email, data.password).then(
+			setLoading(true)
+			AuthService.login(data.email, data.password).then(
 		  (result) => {
 		
 			// const Msg = () => (
@@ -218,7 +219,15 @@ function Login() {
 		  <div className="d-flex align-items-center justify-content-between pb-0">
 		   
 		              
-                      <button type="submit" className="btn bg-gradient-info w-100 mt-4 mb-0"  >{loading?<PulseLoader/> :"Login"}</button> 
+                     {!loading?(
+						<button type="submit" className=""> Login</button> 
+
+					 ):(
+						<button disabled className=""> <PulseLoader color="#fff" size={50}/></button>
+
+					 )
+
+					 } 
                      
 					      
             </div>
