@@ -5,7 +5,8 @@ import MainRoutes from './route'
 import { useNavigate, Link,useLocation } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
-import 'react-loading-skeleton/dist/skeleton.css'
+import 'react-loading-skeleton/dist/skeleton.css';
+
 
 
 
