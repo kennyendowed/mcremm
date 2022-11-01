@@ -65,7 +65,7 @@ function ReportDetails({ RmsCustomers,updateSET }) {
       });
 
 };
-
+console.log()
   return (
         <>
   

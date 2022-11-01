@@ -6,8 +6,9 @@ import ReportDetails from "../../../Components/Pages/ReportDetails";
 import LoadingSpinner from "../../../Components/Utility/spinner";
 import dashboardService from "../../../core/services/dashboard.service";
  import { Modal, Button } from "react-bootstrap";
-import "./Reports.css"
-import LoadingLogo from "../../../Components/Utility/LoadingLogo";
+import "./Reports.css";
+
+import {InfinitySpin} from 'react-loader-spinner';
 
 function Reports(props) {
   const date = new Date();
@@ -408,7 +409,11 @@ function Reports(props) {
                       </div>
                       <div className="card-body px-0 pb-2">
                       {showLoader && (
-                                        <LoadingLogo />
+                        <InfinitySpin 
+                        width='200'
+                        color="#4fa94d"
+                      />
+                                    //  <Loader type="ThreeDots" color="#2BAD60" height="100" width="100" />
                                         )}
                          <div className="table-responsive">
                         <table className="table table-centered table-nowrap mb-0 rounded">
