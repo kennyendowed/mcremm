@@ -21,12 +21,11 @@ function Login() {
 	// 	setShowpassword(true);
 
 	// }
-	const onSubmit =async (data) => {
+	const onSubmit = async (data) => {
 	    // console.log(data.email);
 		// console.log(data.username);
-		
+		setLoading(true)
 		  try {
-			setLoading(true)
 			AuthService.login(data.email, data.password).then(
 		  (result) => {
 		
@@ -53,9 +52,10 @@ function Login() {
 				}
 		
 			
-		  },
-		  (ex) => {
-			console.log(ex.response.data.status);
+		  }
+		//   ,
+		//   (ex) => {
+		  // console.log(ex ,"kkkkkkk");
 	// 		 if (typeof ex.message == 'string'){
     //     let Msg = () => (
     //       <div>
@@ -75,34 +75,34 @@ function Login() {
     //   }
 
 		
-				if (typeof  ex.response.data.data != 'string') {
-				  for (let err in  ex.response.data.data) {
-					// console.log(err);
-					let Msg = () => (
-						<div>
-							 <img src={logo} className="toaster-brand-img h-100 wi0" alt="main_logo" />
-						<p> { ex.response.data.data[0].message} </p> 
-						</div>
-					  )
-					toast.error(Msg, {
-						position: "top-right",
-						autoClose: 10000,
-						hideProgressBar: false,
-						closeOnClick: true,
-						pauseOnHover: true,
-						draggable: true,
-						progress: undefined,
-						});
-				   // this._globals.toastAlert( ex.response.data.error.data[0].message, 'error');
-				  }
-				}
+			
+		// 		  for (let err in  ex.response.data.data) {
+		// 			 console.log(err);
+		// 			let Msg = () => (
+		// 				<div>
+		// 					 <img src={logo} className="toaster-brand-img h-100 wi0" alt="main_logo" />
+		// 				<p> { err.message} </p> 
+		// 				</div>
+		// 			  )
+		// 			toast.error(Msg, {
+		// 				position: "top-right",
+		// 				autoClose: 10000,
+		// 				hideProgressBar: false,
+		// 				closeOnClick: true,
+		// 				pauseOnHover: true,
+		// 				draggable: true,
+		// 				progress: undefined,
+		// 				});
+		// 		   // this._globals.toastAlert( ex.response.data.error.data[0].message, 'error');
+		// 		  }
+			
 		
-			// console.log(ex.response.data.data[0].message);
-		  }
-		);
+		// 	// console.log(ex.response.data.data[0].message);
+		//   }
+		// );
 	
-	  } catch (err) {
-		console.log(err);
+	 ) } catch (err) {
+		console.log("ujijijijiji",err);
 					
         let Msg = () => (
           <div>
@@ -119,10 +119,7 @@ function Login() {
           draggable: true,
           progress: undefined,
           });
-    
-	  }finally{
-		setLoading(false)
-		
+		  setLoading(false)
 	  }
 
 	  };
@@ -218,17 +215,9 @@ function Login() {
 
 		  <div className="d-flex align-items-center justify-content-between pb-0">
 		   
-		              
-                     {!loading?(
-						<button type="submit" className=""> Login</button> 
+		
+						<button className="btn bg-gradient-info w-100 mt-4 mb-0">{loading ? <PulseLoader color="#fff" size={20}/> : "Login" }</button>
 
-					 ):(
-						<button disabled className=""> <PulseLoader color="#fff" size={50}/></button>
-
-					 )
-
-					 } 
-                     
 					      
             </div>
 					

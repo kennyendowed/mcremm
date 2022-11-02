@@ -12,7 +12,7 @@ const fetchExistedUsers = () => {
 
 const fetchDocument =() =>{
   return axios.get(API_URL2 + "getReport", { headers: authHeader() });
-
+}
 const fetchAllCompany =() =>{
   return axios.get(API_URL2 + "GetallCompany", { headers: authHeader() });
 }
@@ -44,7 +44,7 @@ const GetReport =(payload) =>{
 
 
 const dashboardService = {
-  AddDocument,GetReport,fetchTreatedRequests,fetchDocument,fetchPendingRequests,fetchExistedUsers,fetchRMSCustomerUsersList,ReassignRequest,ActionRequest,GetReport,fetchAllCompany,fetchExistedUsers,DownloadDoc
+  AddDocument,GetReport,fetchDocument,fetchExistedUsers,GetReport,fetchAllCompany,fetchExistedUsers,DownloadDoc
 };
 
 export default dashboardService;
