@@ -7,14 +7,17 @@ import ReassignRequestService from "../../../core/services/dashboard.service";
 import LoadingSpinner from "../../Utility/spinner";
 import dashboardService from "../../../core/services/dashboard.service";
 import moment from "moment";
+import { PulseLoader } from "react-spinners";
 
 
 function ReportDetails({ RmsCustomers,updateSET }) {
   const {createdAt,weight,companyName,capacity,avater,equipment,user_id,sN,ref,organisation_details,inspDate,nextInspDate,fleetNO,manufacturer, location,manufacturedYear,modeType,id} = RmsCustomers;
 // console.log(RmsCustomers)
 //const  IMG ="data:image/png;base64,"+avater +"";
+const [loading, setLoading] = useState(false)
 
   const DownloadReport =async (record) => {
+    setLoading(true)
    const dg ={
     id:record.id
    }
@@ -37,7 +40,9 @@ function ReportDetails({ RmsCustomers,updateSET }) {
             draggable: true,
              progress: undefined,
          });
+         
          window.open(response.data, '_blank').focus();
+         setLoading(false)
         }
       },
       (ex) => {
@@ -103,7 +108,7 @@ console.log()
 
                                 <br/>
                                 
-                                    <a className="btn btn-sm btn-secondary" onClick={() => DownloadReport(RmsCustomers)} >Download Report</a>
+                                    <a className="btn btn-sm btn-secondary" onClick={() => DownloadReport(RmsCustomers)} >{loading ? <PulseLoader color="#fbbf0e" /> :"Download Report"}</a>
                                 </div>
                              </div>
                         </div>

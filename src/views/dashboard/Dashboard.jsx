@@ -37,8 +37,8 @@ function Dashboard() {
                 <div className="card-body">
                 <Button variant="primary" className="pull-right" onClick={() => handleBulkShow()}>
                         Add Report
-                                                        </Button>
-                <Reports />
+                </Button>
+                <Reports/>
                 </div>
             </div>
             </div>
@@ -47,7 +47,7 @@ function Dashboard() {
                         <Modal.Title></Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <SaveReport  />
+                        <SaveReport />
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={handleBulkModalClose}>

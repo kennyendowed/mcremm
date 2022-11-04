@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import { toast } from 'react-toastify';
 import logo from "../../../assets/img/logo.svg";
 import dashboardService from "../../../core/services/dashboard.service";
+import { PulseLoader } from 'react-spinners';
 
 
 const API_URL2 = process.env.REACT_APP_BaseApi_URL
@@ -27,6 +28,7 @@ function SaveReport(){
   const [ file , setFile ] = useState([]) 
   const [formdata , setFormdata ] = useState(INITIAL_FORM_STATE)
   const [ items ,setItems ] = useState([])
+  const [loading , setLoading] = useState(false)
 
 
   const handleFormStateChange = (event) => {
@@ -62,8 +64,10 @@ function SaveReport(){
 
   const handleSubmit = async (e)=>{
     e.preventDefault()
+    setLoading(true)
     const token =  localStorage.getItem("token")
     const formData = new FormData();
+   
     
     formData.append("ref", formdata.ref);
     formData.append("weight", formdata.weight);
@@ -83,7 +87,7 @@ function SaveReport(){
     for (var pair of formData.entries()) {
       console.log(pair[0] + ", " + pair[1]);
     }
-  
+    
     dashboardService.AddDocument(formData).then(
       (response) => {
          
@@ -108,7 +112,7 @@ function SaveReport(){
                   draggable: true,
                   progress: undefined,
               });
-              
+              setLoading(false) 
           }
           
       }  , 
@@ -131,6 +135,7 @@ function SaveReport(){
                           draggable: true,
                           progress: undefined,
                       });
+                     
                   }
   
                   if (ex.response.data.status === "FALSE") {
@@ -169,11 +174,12 @@ function SaveReport(){
                           progress: undefined,
                       });
                   }
-  
+                  
               }
+              
           );
   
-  
+          
     }
 
 
@@ -379,7 +385,7 @@ function SaveReport(){
                             </div>
                      
                             <div className="mt-3">
-                                <button className="btn btn-gray-800 mt-2 animate-up-2"  onClick={handleSubmit} type="submit">Save all</button>
+                                <button className="btn btn-gray-800 mt-2 animate-up-2"  onClick={handleSubmit} type="submit">{loading ? <PulseLoader color="#fbbf0e" /> :"Save all"}</button>
                             </div>
                      
                       </div>

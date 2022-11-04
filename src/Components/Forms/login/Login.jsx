@@ -3,8 +3,9 @@ import { useNavigate,Link } from "react-router-dom";
 import { toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
 import AuthService from "../../../core/services/auth.service";
-import {ScaleLoader} from "react-spinners";
+
 import "./Login.css";
+import {PulseLoader} from "react-spinners";
 // import background from "../../../assets/img/curved-images/curved6.jpg";
  import logo from "../../../assets/img/logo.svg";
 import { display } from "@mui/system";
@@ -194,8 +195,8 @@ function Login() {
 			              {...register('password',{
                           required: "Password is required",
                           minLength: {
-                          value: 4,
-                          message: "Password must be more than 4 characters",
+                          value: 8,
+                          message: "Password must be more than 8 characters",
                           },
                 // maxLength: {
                 //   value: 10,
@@ -213,7 +214,7 @@ function Login() {
 		  <div className="d-flex align-items-center justify-content-between pb-0">
 		   
 		              
-                      <button type="submit" className="btn bg-gradient-info w-100 mt-4 mb-0"  >{loading ? <ScaleLoader color="#fbbf0e" /> :"Login"}</button> 
+                      <button type="submit" className="btn bg-gradient-info w-100 mt-4 mb-0"  >{loading ? <PulseLoader color="#fbbf0e" /> :"Login"}</button> 
                      
 					      
             </div>
@@ -226,13 +227,7 @@ function Login() {
                   </p>
                 </div>
 
-		  <div className="d-flex align-items-center justify-content-between pb-0">
-		   
 		
-						<button className="btn bg-gradient-info w-100 mt-4 mb-0">{loading ? <PulseLoader color="#fff" size={20}/> : "Login" }</button>
-
-					      
-            </div>
 					
       </form>
 	 

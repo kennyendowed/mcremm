@@ -13,8 +13,13 @@ const fetchExistedUsers = () => {
 const fetchDocument =() =>{
   return axios.get(API_URL2 + "getReport", { headers: authHeader() });
 }
+
+
 const fetchAllCompany =() =>{
   return axios.get(API_URL2 + "GetallCompany", { headers: authHeader() });
+}
+const GetAllStatusCount = () =>{
+  return axios.get(API_URL2 + "GetAllStatusCount",  { headers: authHeader() })
 }
 
 const AddDocument =(payload) =>{
@@ -23,6 +28,8 @@ const AddDocument =(payload) =>{
       return response.data;
   });
 }
+
+
 
 const DownloadDoc = (payload) =>{
   return axios.post(API_URL2 + "Download", payload, { headers: authHeader() })
@@ -33,18 +40,15 @@ const DownloadDoc = (payload) =>{
 const GetReport =(payload) =>{
   return axios.post(API_URL2 + "getReport",payload, {headers: authHeader()})
   .then((response) => {
-   // console.log("axios------------------",response)
+  
       return response.data;
   });
-  // .catch((err)=>{
-  //  // console.log("axios------------------",err)
-  //   return err.response;
-  // });
+
 }
 
 
 const dashboardService = {
-  AddDocument,GetReport,fetchDocument,fetchExistedUsers,GetReport,fetchAllCompany,fetchExistedUsers,DownloadDoc
+  AddDocument,GetReport,GetAllStatusCount,fetchDocument,fetchExistedUsers,GetReport,fetchAllCompany,fetchExistedUsers,DownloadDoc
 };
 
 export default dashboardService;

@@ -17,8 +17,8 @@ const Search = ({ onSearch, width }) => {
             style={{ width : componentWidth }}
             placeholder="Search"
             value={search}
-          //  onChange={(e) => setQuery(e.target.value.toLowerCase())}
-             onChange={e => onInputChange(e.target.value.toLowerCase())}
+         
+             onChange={(e) =>  { onInputChange(e.target.value.toLowerCase()) } }
         />
     );
 };
