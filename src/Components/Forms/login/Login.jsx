@@ -3,7 +3,7 @@ import { useNavigate,Link } from "react-router-dom";
 import { toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
 import AuthService from "../../../core/services/auth.service";
-import PulseLoader from "react-spinners/PulseLoader";
+import {ScaleLoader} from "react-spinners";
 import "./Login.css";
 // import background from "../../../assets/img/curved-images/curved6.jpg";
  import logo from "../../../assets/img/logo.svg";
@@ -28,7 +28,7 @@ function Login() {
 		  try {
 			AuthService.login(data.email, data.password).then(
 		  (result) => {
-		
+			setLoading(false)
 			// const Msg = () => (
 			// 	<div>
 			// 		 <img src={logo} className="toaster-brand-img h-100" alt="main_logo" />
@@ -73,7 +73,7 @@ function Login() {
     //       progress: undefined,
     //       });
     //   }
-
+	// setLoading(false)
 		
 			
 		// 		  for (let err in  ex.response.data.data) {
@@ -121,6 +121,10 @@ function Login() {
           });
 		  setLoading(false)
 	  }
+	//   finally{
+	
+		
+	//   }
 
 	  };
 	
@@ -204,7 +208,16 @@ function Login() {
 			</div>
           </div>
           <p className="error-color">{errors.password?.message}</p>
-		  <div className="card-footer text-center pt-0 px-lg-2 px-1">
+	
+
+		  <div className="d-flex align-items-center justify-content-between pb-0">
+		   
+		              
+                      <button type="submit" className="btn bg-gradient-info w-100 mt-4 mb-0"  >{loading ? <ScaleLoader color="#fbbf0e" /> :"Login"}</button> 
+                     
+					      
+            </div>
+			<div className="card-footer text-center pt-0 px-lg-2 px-1">
                   <p className="mb-4 text-sm mx-auto">
                     Forgot Password ? 
 					<Link
