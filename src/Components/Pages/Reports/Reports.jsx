@@ -286,12 +286,13 @@ function Reports(props) {
   const commentsData2 = useMemo(() => {
       let computedComments = isFetchExisted;
       if (search) {
-          computedComments = computedComments.filter(comment =>
-              comment.companyName.toLowerCase().includes(search) || comment.equipment.toLowerCase().includes(search) || comment.inspDate.toLowerCase().includes(search)
-          );
-        // console.log(computedComments)
+        console.log(search)
+          computedComments = computedComments.filter(comment => 
+            comment.sN.toLowerCase().includes(search) ||   comment.sN.toLowerCase().includes(search) || comment.companyName.toLowerCase().includes(search) || comment.equipment.toLowerCase().includes(search) || comment.inspDate.toLowerCase().includes(search)
+             );
       }
-      
+    //   console.log(computedComments)
+
       setTotalItems(computedComments.length);
 
       //Sorting comments
@@ -378,19 +379,7 @@ function Reports(props) {
   
                                 </select>      */}
                               </div>
-                              <div className="col-lg-2 mt-3 mt-lg-0">                                
-                              <select   
-                                 name="reason"                
-                                 onChange={(e)=>chnageSelectStatus(e.target.value)}
-                                 value={statusState}     
-                                  className="form-control" required
-                                 >
-                                           <option value=' '>-----o	Select an option-----</option>
-                                           <option value="Approve "> o	Approve request</option>
-                                           <option value="Decline"> o	Decline request</option>
-                                           <option value="AllRequest"> o  AllRequest</option>
-                                </select> 
-                              </div>
+                           
                               <div className="col-lg-2">
                               
                               <button type="submit" className="button mt-4 mt-lg-0  ml-lg-2 mb-0"  > { loading ? <PulseLoader color="#fbbf0e" /> :"Submit"}</button>

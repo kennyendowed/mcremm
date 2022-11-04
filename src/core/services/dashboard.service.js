@@ -46,6 +46,13 @@ const GetReport =(payload) =>{
 
 }
 
+const fetchExistedUsersRecords =(payload)=>{
+  return axios.get(API_URL2 + "/GetAllStatusCount", { headers: authHeader() })
+  .then((response) => {
+      return response.data.data;
+});
+}
+
 
 const dashboardService = {
   AddDocument,GetReport,GetAllStatusCount,fetchDocument,fetchExistedUsers,GetReport,fetchAllCompany,fetchExistedUsers,DownloadDoc

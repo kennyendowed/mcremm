@@ -1,23 +1,28 @@
 import React, { useEffect, useState,createContext ,useMemo } from "react";
-import { useLocation } from "react-router-dom";
-import { toast } from 'react-toastify';
-import logo from "../../assets/img/logo.svg";
+import { useRecordStatusContext } from "../../core/modules";
 import "./Dashboard.css";
-import dashboardService from "../../core/services/dashboard.service";
-import Skeleton from 'react-loading-skeleton';
 import Card from "../../Components/Card/Card";
 import { Modal, Button } from "react-bootstrap";
 import Reports from "../../Components/Pages/Reports";
 import SaveReport  from "../../Components/Pages/SaveReport";
 
-
-function Dashboard() { 
+function Dashboard() {   
+const { isFetchExisted,fetchResult} = useRecordStatusContext();
   const [openModal, setBulkUploadShow] = useState(false);
   const handleBulkModalClose = () => setBulkUploadShow(false);
   const handleBulkShow =() =>{
     setBulkUploadShow(true);
   }
+  useEffect(() => {
+    const timing = setTimeout(async () => {
+   
+      await fetchResult()
   
+  }, 1000)
+  return () => clearTimeout(timing);
+
+}, []);
+
 
   return (
     <div>
@@ -25,12 +30,12 @@ function Dashboard() {
             
                  <Card
                     name = "Client"
-                    price = "345k"
+                    price ={isFetchExisted['Allcompany']?.count}
                     icon = "ni ni-paper-diploma"
                   />
                   <Card
                     name = "Due Date Insp"
-                    price = "$43,594"
+                    price ={isFetchExisted['AllDUEDate']?.count}
                  />             
 
           <div className="card border-0 shadow mb-4">

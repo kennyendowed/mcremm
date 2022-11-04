@@ -1,6 +1,8 @@
-import React from 'react'
-
+import React,{ useState } from 'react';
+import Skeleton from 'react-loading-skeleton';
+import "./Card.css"
 function Card(props) {
+  const newVar = (props.price) ? props.price : '❌ Whoops: 👉️ NILL';
   return (
    
         <div className="col-12 col-sm-6 col-xl-6 mb-4">
@@ -16,7 +18,7 @@ function Card(props) {
                                 <div className="col-12 col-xl-7 px-xl-0">
                                     <div className="d-none d-sm-block">
                                         <h2 className="h6 text-gray-400 mb-0">{props.name}</h2>
-                                        <h3 className="fw-extrabold mb-2">{props.price}</h3>
+                                        <h3 className="fw-extrabold mb-2">  {newVar || <Skeleton />}</h3>
                                     </div>
                                     
                                 </div>
