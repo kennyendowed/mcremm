@@ -284,11 +284,12 @@ function Reports(props) {
   const commentsData2 = useMemo(() => {
       let computedComments = isFetchExisted;
       if (search) {
-          computedComments = computedComments.filter(comment =>
-              comment.newRMcode.toLowerCase().includes(search) || comment.oldRMcODE.toLowerCase().includes(search) || comment.accountNumber.toLowerCase().includes(search)
-          );
+        console.log(search)
+          computedComments = computedComments.filter(comment => 
+            comment.sN.toLowerCase().includes(search) ||   comment.sN.toLowerCase().includes(search) || comment.companyName.toLowerCase().includes(search) || comment.equipment.toLowerCase().includes(search) || comment.inspDate.toLowerCase().includes(search)
+             );
       }
-      
+    //   console.log(computedComments)
 
       setTotalItems(computedComments.length);
 
@@ -332,7 +333,7 @@ function Reports(props) {
                             
                                   {/* <input type ="date" className="form-control" />                                                      */}
                               </div>
-                              <div className="col-lg-2 h-25">
+                              {/* <div className="col-lg-2 h-25">
                                 
                                <label className="d-flex flex-column flex-lg-row gap-2">
                                  from:
@@ -355,7 +356,7 @@ function Reports(props) {
                                      className="form-control" 
                                      />
                                 </label>
-                                </div>
+                                </div> */}
                             
                               <div className="col-lg-2 ">
                                  {/* <select 
