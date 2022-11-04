@@ -14,7 +14,7 @@ function Reports(props) {
   const date = new Date();
   const futureDate = date.getDate() + 3;
   date.setDate(futureDate);
- // const defaultValue = date.toLocaleDateString('en-CA');
+  const defaultValue = date.toLocaleDateString('en-CA');
   const [isSubmitted , setisSubmitted] =useState(false);
   const [isFetchExisted, setFetchExisted] = useState([]);
   const [isFetchDepartment, setDepartment] = useState([]);
@@ -28,8 +28,8 @@ function Reports(props) {
   const [showLoader, setisLoader] = useState(false)
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
-//   const [ fromdate, setFromdate ] = useState(defaultValue);
-//   const [todate, settodate] = useState(defaultValue);
+  const [ fromdate, setFromdate ] = useState(defaultValue);
+  const [todate, settodate] = useState(defaultValue);
 
 
   const ITEMS_PER_PAGE = 20;
@@ -51,19 +51,19 @@ function Reports(props) {
    setRMsCustomerdata(record);
   }
 
-//   const handleChangeStartDate = (newValue) => {
-//     setFromdate(newValue);
-//     if (todate < newValue) {
-//         settodate(newValue);
-//     }
-//   };
-//   const handleChangeEndDate = (newValue) => {
-//     if (newValue < fromdate) {
-//         settodate(fromdate);
-//       return;
-//     }
-//     settodate(newValue);
-//   };
+  const handleChangeStartDate = (newValue) => {
+    setFromdate(newValue);
+    if (todate < newValue) {
+        settodate(newValue);
+    }
+  };
+  const handleChangeEndDate = (newValue) => {
+    if (newValue < fromdate) {
+        settodate(fromdate);
+      return;
+    }
+    settodate(newValue);
+  };
 
   const enabled =
       statusState.length > 0 &&
@@ -332,7 +332,7 @@ function Reports(props) {
                             
                                   {/* <input type ="date" className="form-control" />                                                      */}
                               </div>
-                              {/* <div className="col-lg-2 h-25">
+                              <div className="col-lg-2 h-25">
                                 
                                <label className="d-flex flex-column flex-lg-row gap-2">
                                  from:
@@ -355,7 +355,7 @@ function Reports(props) {
                                      className="form-control" 
                                      />
                                 </label>
-                                </div> */}
+                                </div>
                             
                               <div className="col-lg-2 ">
                                  {/* <select 
@@ -376,19 +376,7 @@ function Reports(props) {
   
                                 </select>      */}
                               </div>
-                              <div className="col-lg-2 mt-3 mt-lg-0">                                
-                              <select   
-                                 name="reason"                
-                                 onChange={(e)=>chnageSelectStatus(e.target.value)}
-                                 value={statusState}     
-                                  className="form-control" required
-                                 >
-                                           <option value=' '>-----o	Select an option-----</option>
-                                           <option value="Approve "> o	Approve request</option>
-                                           <option value="Decline"> o	Decline request</option>
-                                           <option value="AllRequest"> o  AllRequest</option>
-                                </select> 
-                              </div>
+                           
                               <div className="col-lg-2">
                               {!isSubmitted  ? (
                         <button type="submit" className="button mt-4 mt-lg-0  ml-lg-2 mb-0" disabled={!enabled} >Submit</button>

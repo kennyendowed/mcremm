@@ -1,6 +1,6 @@
 import "./App.css";
 import { Header, Sidebar, Footer,Onheader } from "./Components";
-import { MainContextProvider, useMainContext ,AuthContextProvider,useAuthContext} from "./core/modules";
+import { MainContextProvider,RecordStatusContextProvider, useMainContext ,AuthContextProvider,useAuthContext} from "./core/modules";
 import MainRoutes from './route'
 import { useNavigate, Link,useLocation } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
@@ -17,7 +17,9 @@ function App() {
   return (
     <MainContextProvider>
       <AuthContextProvider>
+      <RecordStatusContextProvider>
       <MainRender />  
+      </RecordStatusContextProvider>
       </AuthContextProvider>            
     </MainContextProvider>
   );
