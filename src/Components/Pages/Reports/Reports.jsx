@@ -6,6 +6,7 @@ import ReportDetails from "../../../Components/Pages/ReportDetails";
 import LoadingSpinner from "../../../Components/Utility/spinner";
 import dashboardService from "../../../core/services/dashboard.service";
  import { Modal, Button } from "react-bootstrap";
+ import { PulseLoader } from "react-spinners";
 import "./Reports.css";
 
 import {InfinitySpin} from 'react-loader-spinner';
@@ -14,7 +15,7 @@ function Reports(props) {
   const date = new Date();
   const futureDate = date.getDate() + 3;
   date.setDate(futureDate);
-  const defaultValue = date.toLocaleDateString('en-CA');
+ const defaultValue = date.toLocaleDateString('en-CA');
   const [isSubmitted , setisSubmitted] =useState(false);
   const [isFetchExisted, setFetchExisted] = useState([]);
   const [isFetchDepartment, setDepartment] = useState([]);
@@ -27,6 +28,7 @@ function Reports(props) {
   const [sorting, setSorting] = useState({ field: "", order: "" });
   const [showLoader, setisLoader] = useState(false)
   const [show, setShow] = useState(false);
+  const [loading , setloading] = useState(false)
   const handleClose = () => setShow(false);
   const [ fromdate, setFromdate ] = useState(defaultValue);
   const [todate, settodate] = useState(defaultValue);
@@ -312,7 +314,7 @@ function Reports(props) {
   }, [isFetchExisted, currentPage, search, sorting]);
 
   return (
-      <>
+      
           <div className="row my-4">
             
                   <div className="card">
@@ -325,7 +327,7 @@ function Reports(props) {
                                   <Search
                                        width = "180px"
                                        placeholder="Search"
-                                      onSearch={value => {
+                                       onSearch={value => {
                                           setSearch(value);
                                           setCurrentPage(1);
                                       }}
@@ -379,69 +381,57 @@ function Reports(props) {
                               </div>
                            
                               <div className="col-lg-2">
-                              {!isSubmitted  ? (
-                        <button type="submit" className="button mt-4 mt-lg-0  ml-lg-2 mb-0" disabled={!enabled} >Submit</button>
-                      ) : (
-                        <button
-                          className="btn bg-gradient-info w-100 mt-4 mb-0"
-                          disabled
-                        >
-                          <LoadingSpinner />  
-                        </button>
-                      )
-                      }
-                      </div>
+                              
+                              <button type="submit" className="button mt-4 mt-lg-0  ml-lg-2 mb-0"  > { loading ? <PulseLoader color="#fbbf0e" /> :"Submit"}</button>
+                    
+                      
+                            </div>
                               </form>
                               </div>
                           
                           </div>
                       </div>
                       <div className="card-body px-0 pb-2">
-                      {showLoader && (
-                        <InfinitySpin 
-                        width='200'
-                        color="#4fa94d"
-                      />
-                                    //  <Loader type="ThreeDots" color="#2BAD60" height="100" width="100" />
-                                        )}
-                         <div className="table-responsive">
-                        <table className="table table-centered table-nowrap mb-0 rounded">
+                     <div>
+                    
+                      <div className="table-responsive">
+                            <table className="table table-centered table-nowrap mb-0 rounded">
                             
-                                  <TableHeader
+                                   <TableHeader
                                       headers={headers}
                                       onSorting={(field, order) =>
                                           setSorting({ field, order })
                                       }
-                                  />
+                                   />
                      
-                                  <tbody>                               
-                                  { commentsData2 ? (   
-                                          commentsData2.map((result, index) => {
-                                            let No =index + 1;
-                                              return <tr key={result.id}>
-                                                  <td>{No}</td>
-                                                  <td>{result.sN}</td>
-                                                  <td>{result.companyName}</td>
-                                                  {/* <td>{result.unit}</td> */}
-                                                  <td>{result.equipment}</td>
-                                                 {/* <td>{new Date(result.nextInspDate).toLocaleString() }</td> */}
-                                                 <td>{new Date(result.inspDate).toLocaleString() }</td>
-                                                  <td className="text-right">
+                                    <tbody>                               
+                                      { commentsData2 ? (   
+                                            commentsData2.map((result, index) => {
+                                             let No =index + 1;
+                                               return <tr key={result.id}>
+                                                   <td>{No}</td>
+                                                   <td>{result.sN}</td>
+                                                   <td>{result.companyName}</td>
+                                                   {/* <td>{result.unit}</td> */}
+                                                   <td>{result.equipment}</td>
+                                                  {/* <td>{new Date(result.nextInspDate).toLocaleString() }</td> */}
+                                                   <td>{new Date(result.inspDate).toLocaleString() }</td>
+                                                   <td className="text-right">
                                                         <Button variant="primary" onClick={() => handleShow(result)}>
                                                             View More Details
                                                         </Button>
-
                                                     </td>
-                                              </tr>
-                                             })  ) : (
+                                                 </tr>
+                                             }) ) : (
                                                 <>
                                                <tr>
                                                 <td>No record</td>
                                             </tr>
                                                  </>
-                                                  )
-                                            }
-                                  </tbody>
+                                                
+
+                                             )}   
+                                     </tbody>
                               </table>
                           </div>
                           <div className="col-lg-6 col-5 my-auto text-end">
@@ -453,8 +443,9 @@ function Reports(props) {
                                   />
                               </div>
                       </div>
-                  
-              </div>
+                   </div>
+                                      
+            
               <Modal show={show} onHide={handleClose} size="xl">
                   <Modal.Header closeButton>
                       <Modal.Title> </Modal.Title>
@@ -471,8 +462,9 @@ function Reports(props) {
                       </Button> */}
                   </Modal.Footer>
               </Modal>
+
           
-       </>
+      </div>
 );
 }
 

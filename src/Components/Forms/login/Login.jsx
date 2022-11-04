@@ -3,8 +3,9 @@ import { useNavigate,Link } from "react-router-dom";
 import { toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
 import AuthService from "../../../core/services/auth.service";
-import {ScaleLoader} from "react-spinners";
+
 import "./Login.css";
+import {PulseLoader} from "react-spinners";
 // import background from "../../../assets/img/curved-images/curved6.jpg";
  import logo from "../../../assets/img/logo.svg";
 import { display } from "@mui/system";
@@ -21,12 +22,12 @@ function Login() {
 	// 	setShowpassword(true);
 
 	// }
-	const onSubmit =async (data) => {
+	const onSubmit = async (data) => {
 	    // console.log(data.email);
 		// console.log(data.username);
 		setLoading(true)
 		  try {
-		 AuthService.login(data.email, data.password).then(
+			AuthService.login(data.email, data.password).then(
 		  (result) => {
 			setLoading(false)
 			// const Msg = () => (
@@ -52,9 +53,10 @@ function Login() {
 				}
 		
 			
-		  },
-		  (ex) => {
-			console.log(ex.response.data.status);
+		  }
+		//   ,
+		//   (ex) => {
+		  // console.log(ex ,"kkkkkkk");
 	// 		 if (typeof ex.message == 'string'){
     //     let Msg = () => (
     //       <div>
@@ -72,37 +74,37 @@ function Login() {
     //       progress: undefined,
     //       });
     //   }
-	setLoading(false)
+	// setLoading(false)
 		
-				if (typeof  ex.response.data.data != 'string') {
-				  for (let err in  ex.response.data.data) {
-					// console.log(err);
-					let Msg = () => (
-						<div>
-							 <img src={logo} className="toaster-brand-img h-100 wi0" alt="main_logo" />
-						<p> { ex.response.data.data[0].message} </p> 
-						</div>
-					  )
-					toast.error(Msg, {
-						position: "top-right",
-						autoClose: 10000,
-						hideProgressBar: false,
-						closeOnClick: true,
-						pauseOnHover: true,
-						draggable: true,
-						progress: undefined,
-						});
-				   // this._globals.toastAlert( ex.response.data.error.data[0].message, 'error');
-				  }
-				}
+			
+		// 		  for (let err in  ex.response.data.data) {
+		// 			 console.log(err);
+		// 			let Msg = () => (
+		// 				<div>
+		// 					 <img src={logo} className="toaster-brand-img h-100 wi0" alt="main_logo" />
+		// 				<p> { err.message} </p> 
+		// 				</div>
+		// 			  )
+		// 			toast.error(Msg, {
+		// 				position: "top-right",
+		// 				autoClose: 10000,
+		// 				hideProgressBar: false,
+		// 				closeOnClick: true,
+		// 				pauseOnHover: true,
+		// 				draggable: true,
+		// 				progress: undefined,
+		// 				});
+		// 		   // this._globals.toastAlert( ex.response.data.error.data[0].message, 'error');
+		// 		  }
+			
 		
-			// console.log(ex.response.data.data[0].message);
-		  }
-		);
+		// 	// console.log(ex.response.data.data[0].message);
+		//   }
+		// );
 	
-	  } catch (err) {
-		console.log(err);
-		setLoading(false)	
+	 ) } catch (err) {
+		console.log("ujijijijiji",err);
+					
         let Msg = () => (
           <div>
              <img src={logo} className="toaster-brand-img h-100" alt="main_logo" />
@@ -118,7 +120,7 @@ function Login() {
           draggable: true,
           progress: undefined,
           });
-    
+		  setLoading(false)
 	  }
 	//   finally{
 	
@@ -193,8 +195,8 @@ function Login() {
 			              {...register('password',{
                           required: "Password is required",
                           minLength: {
-                          value: 4,
-                          message: "Password must be more than 4 characters",
+                          value: 8,
+                          message: "Password must be more than 8 characters",
                           },
                 // maxLength: {
                 //   value: 10,
@@ -212,7 +214,7 @@ function Login() {
 		  <div className="d-flex align-items-center justify-content-between pb-0">
 		   
 		              
-                      <button type="submit" className="btn bg-gradient-info w-100 mt-4 mb-0"  >{loading ? <ScaleLoader color="#fbbf0e" /> :"Login"}</button> 
+                      <button type="submit" className="btn bg-gradient-info w-100 mt-4 mb-0"  >{loading ? <PulseLoader color="#fbbf0e" /> :"Login"}</button> 
                      
 					      
             </div>
@@ -224,6 +226,8 @@ function Login() {
 						  className="text-info text-gradient font-weight-bold">Click Me...</Link>
                   </p>
                 </div>
+
+		
 					
       </form>
 	 

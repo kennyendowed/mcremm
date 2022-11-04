@@ -42,8 +42,8 @@ const { isFetchExisted,fetchResult} = useRecordStatusContext();
                 <div className="card-body">
                 <Button variant="primary" className="pull-right" onClick={() => handleBulkShow()}>
                         Add Report
-                                                        </Button>
-                <Reports />
+                </Button>
+                <Reports/>
                 </div>
             </div>
             </div>
@@ -52,7 +52,7 @@ const { isFetchExisted,fetchResult} = useRecordStatusContext();
                         <Modal.Title></Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <SaveReport  />
+                        <SaveReport />
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={handleBulkModalClose}>
@@ -71,6 +71,3 @@ const { isFetchExisted,fetchResult} = useRecordStatusContext();
 }
 
 export default Dashboard;
-
-
-
