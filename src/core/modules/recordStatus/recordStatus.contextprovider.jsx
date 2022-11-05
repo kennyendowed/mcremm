@@ -10,6 +10,7 @@ export const RecordStatusContextProvider = ({ children }) => {
   const fetchResult = () => {
          dashboardService.fetchExistedUsersRecords().then(
           (response) => {
+            console.log(response)
           setFetchExisted(response);
         },
         (ex) => {

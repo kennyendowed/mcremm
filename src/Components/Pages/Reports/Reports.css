@@ -29,3 +29,10 @@
 table tr:nth-child(even) td{
      background:#fff;
 }
+
+.LoaderStyle{
+left: 50%;
+position: absolute;
+text-align: center;
+top: 50%;
+}

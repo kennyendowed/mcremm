@@ -55,7 +55,7 @@ const fetchExistedUsersRecords =(payload)=>{
 
 
 const dashboardService = {
-  AddDocument,GetReport,GetAllStatusCount,fetchDocument,fetchExistedUsers,GetReport,fetchAllCompany,fetchExistedUsers,DownloadDoc
+  fetchExistedUsersRecords, AddDocument,GetReport,GetAllStatusCount,fetchDocument,fetchExistedUsers,GetReport,fetchAllCompany,fetchExistedUsers,DownloadDoc
 };
 
 export default dashboardService;

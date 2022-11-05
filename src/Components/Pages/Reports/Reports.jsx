@@ -190,7 +190,7 @@ function Reports(props) {
 
                    dashboardService.GetReport(arData).then(
                     (response) => {
-                        console.log(response.data[0].code )
+                        // console.log(response)
                    
                         setisLoader(false)	
                         
@@ -393,7 +393,12 @@ function Reports(props) {
                       </div>
                       <div className="card-body px-0 pb-2">
                      <div>
-                    
+                     {showLoader && (
+                        <div className="LoaderStyle">
+                            <PulseLoader color="#fbbf0e" />
+                        </div>
+                                     
+                                        )} 
                       <div className="table-responsive">
                             <table className="table table-centered table-nowrap mb-0 rounded">
                             
@@ -404,7 +409,8 @@ function Reports(props) {
                                       }
                                    />
                      
-                                    <tbody>                               
+                                    <tbody>   
+                                                           
                                       { commentsData2 ? (   
                                             commentsData2.map((result, index) => {
                                              let No =index + 1;
@@ -432,6 +438,7 @@ function Reports(props) {
 
                                              )}   
                                      </tbody>
+                                     
                               </table>
                           </div>
                           <div className="col-lg-6 col-5 my-auto text-end">
